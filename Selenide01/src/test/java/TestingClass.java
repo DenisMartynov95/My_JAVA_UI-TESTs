@@ -6,6 +6,8 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.files.DownloadActions.click;
+import static java.lang.Thread.sleep;
+import static org.junit.Assert.assertTrue;
 
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.AfterAll;
@@ -13,7 +15,7 @@ import org.junit.jupiter.api.AfterAll;
 public class TestingClass extends BaseUrl { // В этот раз УРЛ перенес в отдельный класс, чтобы затем наследовать его
 
     @Test
-    public void testOrder() {
+    public void testOrder() throws InterruptedException {
         openPage();
 
 // 1 Шаг Принял куки
@@ -61,15 +63,9 @@ public class TestingClass extends BaseUrl { // В этот раз УРЛ пер�
         //Ожидание окна подтверждения
         $(byClassName("Order_ModalHeader__3FDaJ")).shouldHave(text("Хотите оформить заказ?"));
         //Как только появилось - нажимаю кнопку "Да"
-        $(byXpath(".//button[2]//text()='Да'")).click();
+        $(byXpath(".//div[2][@class='Order_Content__bmtHS']//div[2][@class='Order_Buttons__1xGrp']//button[2][@class='Button_Button__ra12g Button_Middle__1CSJM']"))
+        .doubleClick();
 
-
-
-// Ожидание, чтобы проверить, что в браузере все выполнилось
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        System.out.println("Кнопка Да не работает ");
     }
 }
